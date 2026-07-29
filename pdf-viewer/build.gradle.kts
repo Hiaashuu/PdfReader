@@ -50,7 +50,7 @@ afterEvaluate {
                 // Fallback to defaults for local testing
                 groupId = project.group.toString().ifEmpty { "com.github.hiaashuu" }
                 artifactId = "pdfreader"
-                version = project.version.toString().ifEmpty { "1.0.3" }
+                version = project.version.toString().ifEmpty { "1.0.4" }
                 
                 from(components["release"])
             }
