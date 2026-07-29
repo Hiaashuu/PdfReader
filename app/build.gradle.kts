@@ -14,7 +14,7 @@ plugins {
 
 android {
     namespace = "com.hiaashuu.pdfreader.app"
-    compileSdk = 35
+    compileSdk = 36 // <-- Updated to 36
 
     defaultConfig {
         applicationId = "com.hiaashuu.pdfreader"
