@@ -36,7 +36,7 @@ class DefaultScrollHandle @JvmOverloads constructor(
 
     init {
         visibility = INVISIBLE
-        setTextColor(Color.BLACK)
+        setTextColor(Color.WHITE)
         setTextSize(DEFAULT_TEXT_SIZE)
     }
 
@@ -64,7 +64,43 @@ class DefaultScrollHandle @JvmOverloads constructor(
                 setBackground(background)
             }
         } else {
-            setBackgroundColor(Color.LTGRAY)
+            val cornerRadiusPx = Util.getDP(context, HANDLE_SHORT).toFloat()
+            val pillDrawable = android.graphics.drawable.GradientDrawable()
+            pillDrawable.setColor(Color.parseColor("#CC2962FF"))
+            if (pdfView.isSwipeVertical) {
+                if (inverted) {
+                    pillDrawable.cornerRadii = floatArrayOf(
+                        0f, 0f,
+                        cornerRadiusPx, cornerRadiusPx,
+                        cornerRadiusPx, cornerRadiusPx,
+                        0f, 0f
+                    )
+                } else {
+                    pillDrawable.cornerRadii = floatArrayOf(
+                        cornerRadiusPx, cornerRadiusPx,
+                        0f, 0f,
+                        0f, 0f,
+                        cornerRadiusPx, cornerRadiusPx
+                    )
+                }
+            } else {
+                if (inverted) {
+                    pillDrawable.cornerRadii = floatArrayOf(
+                        0f, 0f,
+                        0f, 0f,
+                        cornerRadiusPx, cornerRadiusPx,
+                        cornerRadiusPx, cornerRadiusPx
+                    )
+                } else {
+                    pillDrawable.cornerRadii = floatArrayOf(
+                        cornerRadiusPx, cornerRadiusPx,
+                        cornerRadiusPx, cornerRadiusPx,
+                        0f, 0f,
+                        0f, 0f
+                    )
+                }
+            }
+            setBackground(pillDrawable)
         }
 
         val lp = LayoutParams(Util.getDP(context, width), Util.getDP(context, height))
