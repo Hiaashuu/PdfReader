@@ -53,7 +53,7 @@ dependencyResolutionManagement {
 
 ```kotlin
 dependencies {
-    implementation("com.github.hiaashuu:PdfReader:1.0.4")
+    implementation("com.github.hiaashuu:PdfReader:1.0.6")
 }
 ```
 
