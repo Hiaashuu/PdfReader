@@ -7,12 +7,6 @@ import android.graphics.PointF
 import android.view.animation.DecelerateInterpolator
 import android.widget.OverScroller
 
-/**
- * This manager is used by the PDFView to launch animations.
- * It uses the ValueAnimator appeared in API 11 to start
- * an animation, and call moveTo() on the PDFView as a result
- * of each animation update.
- */
 internal class AnimationManager(private val pdfView: PDFView) {
 
     private var animation: ValueAnimator? = null
@@ -72,7 +66,7 @@ internal class AnimationManager(private val pdfView: PDFView) {
         if (scroller.computeScrollOffset()) {
             pdfView.moveTo(scroller.currX.toFloat(), scroller.currY.toFloat())
             pdfView.loadPageByOffset()
-        } else if (flinging) { // fling finished
+        } else if (flinging) {
             flinging = false
             pdfView.loadPages()
             hideHandle()
