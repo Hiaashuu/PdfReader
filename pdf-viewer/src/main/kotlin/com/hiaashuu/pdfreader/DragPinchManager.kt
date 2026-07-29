@@ -97,7 +97,7 @@ internal class DragPinchManager(
         } else {
             if (velocityX > 0) -1 else 1
         }
-        
+
         val delta = if (pdfView.isSwipeVertical) ev.y - downEvent.y else ev.x - downEvent.x
         val offsetX = pdfView.currentXOffset - delta * pdfView.zoom
         val offsetY = pdfView.currentYOffset - delta * pdfView.zoom
