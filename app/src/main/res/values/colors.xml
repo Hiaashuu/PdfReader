@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- CORE BRAND COLORS (UNCHANGED PRIMARY + SURFACE) -->
+    <color name="colorPrimary">#CDCDCE</color>
+    <color name="colorPrimaryVariant">#B0B0B1</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnPrimary">#000000</color>
+    <color name="colorOnSurface">#000000</color>
+
+    <!-- BACKGROUND SYSTEM -->
+    <color name="colorBackground">#F5F7FA</color>
+    <color name="colorOnBackground">#1A1C1E</color>
+    <color name="colorSurfaceVariant">#F0F2F4</color>
+    <color name="colorOnSurfaceVariant">#414349</color>
+
+    <!-- HIGHLIGHTS / ACCENTS -->
+    <color name="colorSecondary">#0065FF</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorTertiary">#FF7E2E</color>
+    <color name="colorOnTertiary">#FFFFFF</color>
+    <color name="colorHighlight">#2962FF</color>
+
+    <!-- ERROR / SUCCESS / WARNING -->
+    <color name="colorError">#BA1A1A</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="colorSuccess">#1B873D</color>
+    <color name="colorOnSuccess">#FFFFFF</color>
+    <color name="colorWarning">#F9A825</color>
+    <color name="colorOnWarning">#000000</color>
+
+    <!-- DISABLE / MUTED / DIVIDERS -->
+    <color name="colorDisabled">#D6D6D6</color>
+    <color name="colorOnDisabled">#8F8F8F</color>
+    <color name="colorDivider">#E6E6E6</color>
+    <color name="colorTextMuted">#727272</color>
+
+    <!-- OUTLINES & STROKES -->
+    <color name="colorOutline">#BFC2C6</color>
+    <color name="colorOutlineVariant">#DADCE0</color>
+
+    <!-- ICONS -->
+    <color name="colorIcon">#444746</color>
+    <color name="colorIconMuted">#9A9A9A</color>
+
+    <!-- CARDS -->
+    <color name="colorCardBackground">#FFFFFF</color>
+    <color name="colorCardStroke">#E0E2E5</color>
+    <color name="colorCardShadow">#12000000</color>
+
+    <!-- STATE LAYERS -->
+    <color name="colorPressed">#14000000</color>
+    <color name="colorFocused">#1A000000</color>
+    <color name="colorHovered">#0F000000</color>
+    <color name="colorRipple">#33000000</color>
+
+    <!-- OVERLAYS / SCRIMS -->
+    <color name="colorScrim">#66000000</color>
+    <color name="colorModalScrim">#99000000</color>
+
+    <!-- SWITCH SYSTEM -->
+    <color name="switchThumbOn">@color/colorHighlight</color>
+    <color name="switchThumbOff">#A0A0A0</color>
+    <color name="switchTrackOn">#4D2962FF</color>
+    <color name="switchTrackOff">#E0E0E0</color>
+
+    <!-- BUTTONS -->
+    <color name="colorButtonPrimary">@color/colorHighlight</color>
+    <color name="colorOnButtonPrimary">#FFFFFF</color>
+
+    <color name="colorButtonSecondary">#E8EAF0</color>
+    <color name="colorOnButtonSecondary">#1A1C1E</color>
+
+    <color name="colorButtonDisabled">#E0E0E0</color>
+    <color name="colorOnButtonDisabled">#9A9A9A</color>
+
+</resources>
