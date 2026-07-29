@@ -40,12 +40,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialTheme {
                 var selectedPdfUri by remember { mutableStateOf<Uri?>(null) }
-                
+
                 val launcher = rememberLauncherForActivityResult(
                     contract = ActivityResultContracts.OpenDocument()
                 ) { uri: Uri? ->
                     uri?.let {
-                        // Take persistable permission so it doesn't crash on reopen if needed
+
                         contentResolver.takePersistableUriPermission(
                             it, Intent.FLAG_GRANT_READ_URI_PERMISSION
                         )
@@ -64,8 +64,8 @@ class MainActivity : ComponentActivity() {
                                 )
                             },
                             actions = {
-                                IconButton(onClick = { 
-                                    launcher.launch(arrayOf("application/pdf")) 
+                                IconButton(onClick = {
+                                    launcher.launch(arrayOf("application/pdf"))
                                 }) {
                                     Icon(Icons.Default.Add, contentDescription = "Pick PDF")
                                 }
@@ -110,13 +110,13 @@ fun PdfViewerComposable(uri: Uri) {
                     .defaultPage(0)
                     .enableAnnotationRendering(true)
                     .scrollHandle(DefaultScrollHandle(context))
-                    .spacing(10) // in dp
+                    .spacing(10)
                     .pageFitPolicy(FitPolicy.BOTH)
                     .load()
             }
         },
         update = { view ->
-            // If the URI changes, we load the new one. (Simplified for testing)
+
             view.recycle()
             view.fromUri(uri)
                 .defaultPage(0)
