@@ -2,7 +2,7 @@
 
     <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <!-- CORE PALETTE -->
+        
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="colorSecondary">@color/colorSecondary</item>
@@ -18,38 +18,38 @@
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="colorOnBackground">@color/colorOnBackground</item>
 
-        <!-- ERROR, SUCCESS -->
+        
         <item name="colorError">@color/colorError</item>
         <item name="colorOnError">@color/colorOnError</item>
 
-        <!-- OUTLINES -->
+        
         <item name="colorOutline">@color/colorOutline</item>
         <item name="colorOutlineVariant">@color/colorOutlineVariant</item>
 
-        <!-- STATE LAYERS -->
+        
         <item name="colorControlActivated">@color/colorHighlight</item>
-        <!-- removed invalid theme attribute 'colorRipple' that caused linking error -->
+        
 
-        <!-- STATUS BAR (unchanged) -->
+        
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:windowLightStatusBar">false</item>
 
-        <!-- WIDGETS -->
+        
         <item name="materialCardViewStyle">@style/AppCardStyle</item>
         <item name="materialButtonStyle">@style/AppButtonStyle</item>
         <item name="toolbarStyle">@style/ToolbarTitleStyle</item>
 
-        <!-- Text Inputs -->
+        
         <item name="textInputStyle">@style/AppTextInputStyle</item>
 
-        <!-- Date Picker -->
+        
         <item name="android:datePickerDialogTheme">@style/CustomDatePickerDialog</item>
 
     </style>
 
     <style name="AppTheme" parent="Base.AppTheme"/>
 
-    <!-- CARD -->
+    
     <style name="AppCardStyle" parent="Widget.Material3.CardView.Filled">
         <item name="cardBackgroundColor">@color/colorCardBackground</item>
         <item name="strokeColor">@color/colorCardStroke</item>
@@ -58,32 +58,32 @@
         <item name="cardElevation">0dp</item>
     </style>
 
-    <!-- BUTTON -->
+    
     <style name="AppButtonStyle" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/colorButtonPrimary</item>
         <item name="android:textColor">@color/colorOnButtonPrimary</item>
         <item name="cornerRadius">8dp</item>
-        <!-- Widget-level ripple usage (valid) -->
+        
         <item name="rippleColor">@color/colorRipple</item>
     </style>
 
     
-    <!-- TOOLBAR -->
+    
     <style name="ToolbarTitleStyle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">28sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
     </style>
 
-    <!-- TEXT INPUT -->
+    
     <style name="AppTextInputStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/colorOutline</item>
         <item name="hintTextColor">@color/colorTextMuted</item>
         <item name="android:textColor">@color/colorOnSurface</item>
-        <!-- Cursor color: keep using app:cursorColor on layout if needed -->
+        
     </style>
 
-    <!-- DATE PICKER -->
+    
     <style name="CustomDatePickerDialog" parent="ThemeOverlay.Material3.MaterialCalendar">
         <item name="colorPrimary">@color/colorHighlight</item>
         <item name="colorOnPrimary">#FFFFFF</item>
