@@ -45,7 +45,7 @@ internal class CacheManager {
     fun cacheThumbnail(part: PagePart) {
         synchronized(thumbnails) {
             while (thumbnails.size >= THUMBNAILS_CACHE_SIZE) {
-                thumbnails.removeAt(0).renderedBitmap.recycle()
+                thumbnails.removeAt(0).renderedBitmap?.recycle()
             }
             addWithoutDuplicates(thumbnails, part)
         }
