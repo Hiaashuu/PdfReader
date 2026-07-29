@@ -1,26 +1,43 @@
-# PdfReader
+<div align="center">
 
-A lightweight, dependency-minimal Android PDF viewer library built on top of PdfiumAndroid, with native Jetpack Compose interop support via `AndroidView`.
+# 📄 PdfReader
 
-[![](https://jitpack.io/v/hiaashuu/PdfReader.svg)](https://jitpack.io/#hiaashuu/PdfReader)
+### A fast, lightweight Android PDF viewer library — built on PdfiumAndroid, wired natively for Jetpack Compose.
 
-## Features
+[![JitPack](https://jitpack.io/v/hiaashuu/PdfReader.svg)](https://jitpack.io/#hiaashuu/PdfReader)
+![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?logo=kotlin&logoColor=white)
+![minSdk](https://img.shields.io/badge/minSdk-21%2B-brightgreen)
+![License](https://img.shields.io/badge/license-MIT--style-blue)
+![Compose](https://img.shields.io/badge/Jetpack%20Compose-Ready-4285F4?logo=jetpackcompose&logoColor=white)
 
-- Smooth pinch-to-zoom and drag/pan page navigation
-- Vertical and horizontal swipe modes
-- Fit policies: WIDTH, HEIGHT, BOTH
-- Asset, File, Uri, ByteArray, and InputStream PDF sources
-- Page snapping and scroll handle (thumb) support
-- Annotation rendering toggle
-- Double-tap zoom and animation manager for smooth transitions
-- Link tap handling (in-document navigation and external URI links)
-- Bitmap caching with active/passive cache eviction and thumbnail cache
-- Async page decoding and rendering via dedicated handler thread
-- Compatible with legacy View-based UI and Jetpack Compose (via `AndroidView`)
+</div>
 
-## Installation
+---
 
-Add JitPack to your root `settings.gradle.kts`:
+## ✨ Features
+
+| Category | Support |
+|---|---|
+| 🔍 Zoom & Pan | Pinch-to-zoom, drag/pan, double-tap zoom |
+| 🔄 Scroll direction | Vertical **and** Horizontal swipe |
+| 📐 Fit policies | `WIDTH`, `HEIGHT`, `BOTH`, per-page fit |
+| 📥 PDF sources | Asset, File, Uri, ByteArray, InputStream, custom `DocumentSource` |
+| 🔒 Password-protected PDFs | ✅ Built-in |
+| 🖱️ Scroll handle (thumb) | ✅ `DefaultScrollHandle` |
+| 🌙 Night mode | ✅ Built-in inverted rendering |
+| 🔗 Link handling | In-document jumps + external URI links |
+| 🖊️ Annotation rendering | Togglable |
+| 🖼️ Bitmap caching | Active/passive eviction + thumbnail cache |
+| ⚡ Async rendering | Dedicated background handler thread |
+| 🧩 UI compatibility | Classic XML View **and** Jetpack Compose (`AndroidView`) |
+| 📑 Page subset | Load only specific pages via `pages(...)` |
+| 🎯 Listeners | Load, error, page error, page change, scroll, render, tap, long-press |
+
+---
+
+## 📦 Installation
+
+**Step 1 — Add JitPack** to your root `settings.gradle.kts`:
 
 ```kotlin
 dependencyResolutionManagement {
@@ -32,7 +49,7 @@ dependencyResolutionManagement {
 }
 ```
 
-Add the dependency to your module's `build.gradle.kts`:
+**Step 2 — Add the dependency** to your module's `build.gradle.kts`:
 
 ```kotlin
 dependencies {
@@ -40,14 +57,17 @@ dependencies {
 }
 ```
 
-## Usage
+---
 
-### Jetpack Compose
+## 🚀 Quick Start
+
+### 🟣 Option A — Jetpack Compose (recommended)
 
 ```kotlin
 @Composable
-fun PdfViewerComposable(uri: Uri) {
+fun PdfViewerScreen(uri: Uri) {
     AndroidView(
+        modifier = Modifier.fillMaxSize(),
         factory = { context ->
             PDFView(context, null).apply {
                 fromUri(uri)
@@ -58,67 +78,203 @@ fun PdfViewerComposable(uri: Uri) {
                     .pageFitPolicy(FitPolicy.BOTH)
                     .load()
             }
-        },
-        modifier = Modifier.fillMaxSize()
+        }
     )
 }
 ```
 
-### Classic View / XML
+### 🔵 Option B — Classic XML Layout
+
+**1. Add the view to your layout XML:**
+
+```xml
+<com.hiaashuu.pdfreader.PDFView
+    android:id="@+id/pdfView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+```
+
+**2. Load it in your Activity/Fragment:**
 
 ```kotlin
+val pdfView = findViewById<PDFView>(R.id.pdfView)
+
 pdfView.fromUri(uri)
     .defaultPage(0)
     .enableAnnotationRendering(true)
-    .scrollHandle(DefaultScrollHandle(context))
+    .scrollHandle(DefaultScrollHandle(this))
     .spacing(10)
     .pageFitPolicy(FitPolicy.BOTH)
     .load()
 ```
 
-### Supported sources
+---
+
+## 📥 Loading PDFs — every supported source
+
+PdfReader can load a PDF from **five different source types** out of the box. Pick whichever fits your use case:
+
+### 1️⃣ From a `Uri` (user-picked file, content provider, SAF)
 
 ```kotlin
-pdfView.fromFile(file)
-pdfView.fromUri(uri)
-pdfView.fromAsset("sample.pdf")
-pdfView.fromBytes(byteArray)
-pdfView.fromStream(inputStream)
+pdfView.fromUri(uri).load()
+```
+> Use this for files picked via `ActivityResultContracts.OpenDocument()` or shared from other apps.
+
+### 2️⃣ From assets (`app/src/main/assets/`)
+
+```kotlin
+pdfView.fromAsset("sample.pdf").load()
+```
+> Place your PDF inside the `assets/` folder of your app module. Great for bundled manuals, docs, or demo content.
+
+### 3️⃣ From a `File` (local storage / downloaded file)
+
+```kotlin
+val file = File(context.filesDir, "document.pdf")
+pdfView.fromFile(file).load()
 ```
 
-## Project Structure
+### 4️⃣ From a `ByteArray` (in-memory / downloaded over network)
+
+```kotlin
+val bytes: ByteArray = downloadPdfBytes() // e.g. from Retrofit/OkHttp
+pdfView.fromBytes(bytes).load()
+```
+> Ideal for **online PDF reading** — fetch bytes from a URL with your networking library of choice, then feed them directly here without writing to disk first.
+
+### 5️⃣ From an `InputStream`
+
+```kotlin
+val stream: InputStream = context.contentResolver.openInputStream(uri)!!
+pdfView.fromStream(stream).load()
+```
+> Useful when you already have a stream open (e.g., from a `ContentResolver`, ZIP entry, or custom source).
+
+### 6️⃣ Custom source (advanced)
+
+```kotlin
+pdfView.fromSource(myCustomDocumentSource).load()
+```
+> Implement `DocumentSource` yourself if none of the above fit your storage layer.
+
+**📡 Reading a PDF straight from the internet — full example:**
+
+```kotlin
+lifecycleScope.launch(Dispatchers.IO) {
+    val bytes = URL("https://example.com/sample.pdf").readBytes()
+    withContext(Dispatchers.Main) {
+        pdfView.fromBytes(bytes)
+            .defaultPage(0)
+            .pageFitPolicy(FitPolicy.BOTH)
+            .load()
+    }
+}
+```
+> For production apps, prefer OkHttp/Retrofit over raw `URL.readBytes()` for timeout handling, caching, and error control.
+
+---
+
+## ⚙️ Full Configuration Reference
+
+Every `Configurator` option available after `.fromX(...)`:
+
+```kotlin
+pdfView.fromUri(uri)
+    .pages(0, 2, 4)                          // load only specific pages (optional)
+    .defaultPage(0)                          // page to open on
+    .enableSwipe(true)                       // enable swipe navigation
+    .swipeHorizontal(false)                  // false = vertical, true = horizontal
+    .enableDoubletap(true)                   // double-tap to zoom
+    .enableAnnotationRendering(true)         // render PDF annotations
+    .password(null)                          // pass a String if PDF is encrypted
+    .scrollHandle(DefaultScrollHandle(context)) // draggable scroll thumb
+    .spacing(10)                             // dp spacing between pages
+    .autoSpacing(false)                      // auto-fit spacing to screen
+    .pageFitPolicy(FitPolicy.BOTH)           // WIDTH, HEIGHT, or BOTH
+    .fitEachPage(false)                      // fit each page individually
+    .nightMode(false)                        // inverted colors for dark reading
+    .disableLongpress()                      // disable long-press gesture
+    .linkHandler(DefaultLinkHandler(pdfView)) // handle in-doc/external links
+    .onLoad(OnLoadCompleteListener { pages -> })
+    .onError(OnErrorListener { throwable -> })
+    .onPageError(OnPageErrorListener { page, throwable -> })
+    .onPageChange(OnPageChangeListener { page, pageCount -> })
+    .onPageScroll(OnPageScrollListener { page, positionOffset -> })
+    .onRender(OnRenderListener { pagesCount -> })
+    .onTap(OnTapListener { motionEvent -> false })
+    .onLongPress(OnLongPressListener { motionEvent -> })
+    .load()
+```
+
+---
+
+## 🔁 Reloading / swapping a PDF at runtime
+
+Whether in Compose or XML, always `recycle()` before loading a new document into the same `PDFView` instance:
+
+```kotlin
+pdfView.recycle()
+pdfView.fromUri(newUri)
+    .defaultPage(0)
+    .load()
+```
+
+In Compose, do this inside the `update` block of `AndroidView`:
+
+```kotlin
+AndroidView(
+    factory = { context -> PDFView(context, null).apply { fromUri(uri).load() } },
+    update = { view ->
+        view.recycle()
+        view.fromUri(uri).load()
+    }
+)
+```
+
+---
+
+## 🏗️ Project Structure
 
 ```
 PdfReader/
-├── app/            Demo app showcasing library usage (not published)
-└── pdf-viewer/     The published library module (JitPack artifact)
+├── app/            🧪 Demo app showcasing library usage (not published)
+└── pdf-viewer/     📚 The published library module (JitPack artifact)
 ```
 
-Only the `pdf-viewer` module is published to JitPack. The `app` module exists purely as a sample/demo for local testing inside AndroidIDE and is never included in the release artifact.
+> Only `pdf-viewer` is published to JitPack. `app` is a sample module for local testing inside AndroidIDE — never shipped in the release artifact.
 
-## Requirements
+---
 
-- `minSdk` 21+
-- Kotlin 2.1.0+
-- AGP 8.13.0+
+## 📋 Requirements
 
-## Version
+| Tool | Minimum |
+|---|---|
+| `minSdk` | 21+ |
+| Kotlin | 2.1.0+ |
+| AGP | 8.13.0+ |
 
-**Current stable: 1.0.4**
+---
 
-### Changelog
+## 🏷️ Version
+
+**Current stable: `1.0.4`**
+
+### 📝 Changelog
 
 **1.0.4**
-- Fixed nullable `Bitmap?` compiler errors across `CacheManager`, `PDFView`, and `RenderingHandler` (safe-call recycle, early-return null guard in `drawPart`)
-- Verified clean `publishToMavenLocal` build on Gradle 9.0.0 / Kotlin 2.2.0 toolchain
+- 🐛 Fixed nullable `Bitmap?` compiler errors across `CacheManager`, `PDFView`, and `RenderingHandler` (safe-call recycle, early-return null guard in `drawPart`)
+- ✅ Verified clean `publishToMavenLocal` build on Gradle 9.0.0 / Kotlin 2.2.0 toolchain
 
 **1.0.3**
-- Initial stable JitPack release
+- 🚀 Initial stable JitPack release
 
-## License
+---
+
+## 📄 License
 
 This project builds on the architecture of `android-pdf-viewer` (Barteksc), adapted and maintained under the `com.hiaashuu` namespace.
 
-## Author
+## 👤 Author
 
-Built and maintained by [Hiaashuu](https://github.com/hiaashuu), published via CodXFuse.
+Built and maintained by **[Hiaashuu](https://github.com/hiaashuu)** · published via CodXFuse.
