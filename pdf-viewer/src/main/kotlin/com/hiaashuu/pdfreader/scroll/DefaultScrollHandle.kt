@@ -44,11 +44,9 @@ class DefaultScrollHandle @JvmOverloads constructor(
         val align: Int
         val width: Int
         val height: Int
-        // NOTE: If you need backgrounds for the scroll handle, you should create simple XML shapes 
-        // in your drawable folder named default_scroll_handle_left/right/top/bottom.
-        // I have removed the direct resource lookup here to prevent build failures if you haven't created them yet.
-        val background: Drawable? = null 
-        
+
+        val background: Drawable? = null
+
         if (pdfView.isSwipeVertical) {
             width = HANDLE_LONG
             height = HANDLE_SHORT
