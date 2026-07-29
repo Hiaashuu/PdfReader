@@ -162,9 +162,9 @@ class PDFView(context: Context, set: AttributeSet?) : RelativeLayout(context, se
             animationManager = AnimationManager(this)
             dragPinchManager = DragPinchManager(this, animationManager)
             pagesLoader = PagesLoader(this)
-            
+
             debugPaint.style = Paint.Style.STROKE
-            
+
             pdfiumCore = PdfiumCore(context)
             setWillNotDraw(false)
         } else {
@@ -196,7 +196,7 @@ class PDFView(context: Context, set: AttributeSet?) : RelativeLayout(context, se
 
         val validPage = pdfFile!!.determineValidPageNumberFrom(page)
         val offset = if (validPage == 0) 0f else -pdfFile!!.getPageOffset(validPage, zoom)
-        
+
         if (isSwipeVertical) {
             if (withAnimation) {
                 animationManager.startYAnimation(currentYOffset, offset)
@@ -618,7 +618,7 @@ class PDFView(context: Context, set: AttributeSet?) : RelativeLayout(context, se
     fun moveTo(offsetX: Float, offsetY: Float, moveHandle: Boolean) {
         var newOffsetX = offsetX
         var newOffsetY = offsetY
-        
+
         if (isSwipeVertical) {
             val scaledPageWidth = toCurrentScale(pdfFile!!.maxPageWidth)
             if (scaledPageWidth < width) {
