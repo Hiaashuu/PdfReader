@@ -5,7 +5,7 @@ import android.graphics.RectF
 
 class PagePart(
     val page: Int,
-    val renderedBitmap: Bitmap,
+    val renderedBitmap: Bitmap?,
     val pageRelativeBounds: RectF,
     val isThumbnail: Boolean,
     var cacheOrder: Int
