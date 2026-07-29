@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("maven-publish") // Required to publish the library
+    id("maven-publish")
 }
 
 android {
     namespace = "com.hiaashuu.pdfreader"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 21
@@ -28,7 +28,6 @@ android {
         }
     }
     
-    // Configures the library to generate source and javadoc jars
     publishing {
         singleVariant("release") {
             withSourcesJar()
@@ -43,14 +42,15 @@ dependencies {
     api(libs.pdfium.android)
 }
 
-// Configures the Maven Publication payload
 afterEvaluate {
     publishing {
         publications {
             register<MavenPublication>("release") {
-                groupId = "com.github.hiaashuu"
+                // Dynamically fetch the Group and Version injected by JitPack's GitHub Tag
+                // Fallback to defaults for local testing
+                groupId = project.group.toString().ifEmpty { "com.github.hiaashuu" }
                 artifactId = "pdfreader"
-                version = "1.0.0"
+                version = project.version.toString().ifEmpty { "1.0.2" }
                 
                 from(components["release"])
             }
