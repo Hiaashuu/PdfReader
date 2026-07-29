@@ -497,7 +497,7 @@ class PDFView(context: Context, set: AttributeSet?) : RelativeLayout(context, se
 
     private fun drawPart(canvas: Canvas, part: PagePart) {
         val pageRelativeBounds = part.pageRelativeBounds
-        val renderedBitmap = part.renderedBitmap
+        val renderedBitmap = part.renderedBitmap ?: return
 
         if (renderedBitmap.isRecycled) {
             return
