@@ -25,7 +25,7 @@ internal class RenderingHandler(looper: Looper, private val pdfView: PDFView) : 
     private var running = false
 
     fun addRenderingTask(
-        page: Int, width: Float, height: Float, bounds: RectF, thumbnail: Boolean, 
+        page: Int, width: Float, height: Float, bounds: RectF, thumbnail: Boolean,
         cacheOrder: Int, bestQuality: Boolean, annotationRendering: Boolean
     ) {
         val task = RenderingTask(width, height, bounds, page, thumbnail, cacheOrder, bestQuality, annotationRendering)
