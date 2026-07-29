@@ -33,12 +33,12 @@ internal class PdfFile(
     private val openedPages = SparseBooleanArray()
     private var originalMaxWidthPageSize = Size(0, 0)
     private var originalMaxHeightPageSize = Size(0, 0)
-    
+
     var maxHeightPageSize: SizeF = SizeF(0f, 0f)
         private set
     var maxWidthPageSize: SizeF = SizeF(0f, 0f)
         private set
-        
+
     private val pageOffsets: MutableList<Float> = ArrayList()
     private val pageSpacing: MutableList<Float> = ArrayList()
     private var documentLength = 0f
