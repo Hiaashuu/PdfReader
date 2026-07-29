@@ -41,7 +41,7 @@ internal class RenderingHandler(looper: Looper, private val pdfView: PDFView) : 
                 if (running) {
                     pdfView.post { pdfView.onBitmapRendered(part) }
                 } else {
-                    part.renderedBitmap.recycle()
+                    part.renderedBitmap?.recycle()
                 }
             }
         } catch (ex: PageRenderingException) {
