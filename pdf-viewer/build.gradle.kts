@@ -27,7 +27,7 @@ android {
             jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget("17"))
         }
     }
-
+    
     publishing {
         singleVariant("release") {
             withSourcesJar()
@@ -38,7 +38,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-
+    // Expose Pdfium so apps consuming this library can access it if needed
     api(libs.pdfium.android)
 }
 
@@ -46,11 +46,12 @@ afterEvaluate {
     publishing {
         publications {
             register<MavenPublication>("release") {
-
+                // Dynamically fetch the Group and Version injected by JitPack's GitHub Tag
+                // Fallback to defaults for local testing
                 groupId = project.group.toString().ifEmpty { "com.github.hiaashuu" }
                 artifactId = "pdfreader"
-                version = project.version.toString().ifEmpty { "1.0.2" }
-
+                version = project.version.toString().ifEmpty { "1.0.3" }
+                
                 from(components["release"])
             }
         }
